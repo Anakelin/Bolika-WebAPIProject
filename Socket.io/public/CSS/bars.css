@@ -1,0 +1,123 @@
+:root {
+  --Hborder: #1d1f1e;
+  --HText:#12b347;
+  --HColor:#16cc53;
+  --HShade:#58d482;
+  /*--Eborder:#29787e;*/
+  --Eborder:#1d1f1e;
+  --HText:#128db3;
+  --EColor:#16c0cc;
+  --EShade:#77d7f0;
+  --HHeight:15px;
+}
+
+
+#health-bar0 {
+    box-sizing: border-box;
+    width: 200px;
+    height: 25px;
+    padding: 5px;
+    background: var(--Hborder);
+    border-radius: 5px;
+    position: absolute;    
+    top: 20%;
+    left: 7%;
+}
+
+#energy-bar0{
+  box-sizing: border-box;
+  width: 200px;
+  height: 13px;
+  padding: 4px;
+  background: var(--Eborder);
+  border-radius: 5px;
+  position: absolute;
+  top: 25%;
+  left: 7%;
+}
+  #bar0, #bar1 {
+    background: var(--HColor);
+    width: 100%;
+    height: 15px;
+    float: left;
+    transition: width 250ms linear;
+  }
+
+  #barvalue0, #barvalue1 {
+    color: var(--HText);
+  }
+
+  #barE0,#barE1 {
+    background: var(--EColor);
+    width: 100%;
+      height: 5px;
+      float: left;
+      transition: width 250ms linear;
+  }
+
+  #hit0,#hit1 {
+    /*background: #cc1616;*/
+    background: #58d482;
+    width: 100%;
+    height: 15px;
+    transition: width 250ms linear;
+    transition-delay: 350ms;
+  }
+  #hitE0 {
+    /*background: #cc1616;*/
+    background: var(--EShade);
+    width: 100%;
+    height: 5px;
+    transition: width 250ms linear;
+    transition-delay: 350ms;
+  }
+
+
+#health-bar1 {
+  box-sizing: border-box;
+  width: 200px;
+  height: 25px;
+  padding: 5px;
+  background: var(--Hborder);
+  border-radius: 5px;
+  position: absolute;
+    top: 20%;
+    left: 68%;
+}
+#energy-bar1{
+  box-sizing: border-box;
+  width: 200px;
+  height: 13px;
+  padding: 4px;
+  background: var(--Eborder);
+  border-radius: 5px;
+  position: absolute;
+  top: 25%;
+  left: 68%;
+}
+/*
+  #bar1 {
+    background: var(--HColor);
+    width: 100%;
+    height: 15px;
+    float: left;
+    transition: width 250ms linear;
+  }
+  
+  #barE1 {
+    background: var(--EColor);
+    width: 100%;
+      height: 5px;
+      float: left;
+      transition: width 250ms linear;
+  }
+  
+  #hit1 {
+    
+    background: #58d482;
+    width: 100%;
+    height: 15px;
+    transition: width 250ms linear;
+    transition-delay: 350ms;
+  }
+  */

@@ -1,0 +1,171 @@
+  /*
+  #battle>#char{
+    margin-top: 100px;
+    margin-left: 50px;
+  }
+  #battle>#flip{
+    margin-top: 100px;
+    margin-right: 50px;
+  }
+  #arrowflip,#arrownoflip{
+    margin-top: 100px;
+  }
+
+  #char{
+    display: inline-block;
+    overflow: hidden;
+    position: absolute;
+    
+}
+#spritesheet{
+  height: 203px;
+  width: 8217px;
+  
+}
+
+#flip{
+  transform: scaleX(-1);
+  display: inline-block;
+  position:absolute;
+  right: 0;
+}
+
+#char2{
+  overflow: hidden;
+  position: absolute;
+ 
+}
+#spritesheet2{
+  height: 203px;
+  width: 8217px;
+  
+}
+
+#arrowflip{
+  transform: scaleX(-1);
+  position: absolute;
+  z-index: 10;
+}
+
+#arrownoflip{
+  
+  position: absolute;
+  z-index: 10;
+}
+
+#arrowbox{
+  width: 188px;
+  height: 83px;
+  overflow: hidden;
+  
+  z-index: 10;
+}
+
+#arrow{
+  z-index: 10;
+  animation: arrowMovement steps(33) 1s;
+}
+
+#healbox{
+  width: 146px;
+  height: 209px;
+  overflow: hidden;
+  position: absolute;
+  
+  z-index: 10;
+}
+#heal{
+  
+  z-index: 10;
+  animation: healMovement steps(57) 1000ms ;
+}
+  */
+#healbox{
+  width: 146px;
+  height: 209px;
+  overflow: hidden;
+  position: absolute;
+  
+  z-index: 10;
+}
+#arrow{
+  z-index: 10;
+  animation: arrowMovement steps(33) 1s;
+}
+#heal{
+  
+  z-index: 10;
+  animation: healMovement steps(57) 1000ms ;
+}
+  .activeAnimation {
+    animation: idleCombat steps(33) 500ms infinite;
+  }
+  .activeSpearAnimation {
+    animation: spearMovement steps(33) 900ms;
+  }
+  .activeHorseAnimation1 {
+    animation: horseMovement1 steps(33) 1000ms ;
+  }
+  .activeHorseAnimation2 {
+    animation: horseMovement2 steps(33) 1000ms ;
+  }
+  .pauseAnimation {
+    animation-play-state: paused;
+  }
+  input{
+    margin-top: 50%;
+    position: relative;
+  }
+
+  @keyframes idleCombat {
+    0%{
+      transform: translate3d(0px, 0, 0)
+    }
+    100%{
+      transform: translate3d(-8217px, 0, 0)
+    }
+  }
+  @keyframes spearMovement {
+    0%{
+      transform: translate3d(0px, 0, 0)
+    }
+    100%{
+      transform: translate3d(-10560px, 0, 0)
+    }
+  }
+
+  @keyframes horseMovement1 {
+    0%{
+      transform: translate3d(0px, 0, 0)
+    }
+    100%{
+      transform: translate3d(-11946px, 0, 0)
+    }
+  }
+  
+  @keyframes horseMovement2 {
+    0%{
+      transform: translate3d(0px, 0, 0)
+    }
+    100%{
+      transform: translate3d(-10659px, 0, 0)
+    }
+  }
+  
+  @keyframes arrowMovement {
+    0%{
+      transform: translate3d(0px, 0, 0)
+    }
+    100%{
+      transform: translate3d(-7953px, 0, 0)
+    }
+  }
+
+  @keyframes healMovement {
+    0%{
+      transform: translate3d(0px, 0, 0)
+    }
+    100%{
+      transform: translate3d(-8322px, 0, 0)
+    }
+  }

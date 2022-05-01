@@ -1,0 +1,6 @@
+GET HTTP://localhost:5113/api/Bolika HTTP/1.1
+###
+GET HTTP://localhost:5113/api/Bolika/1 HTTP/1.1
+###
+GET HTTP://localhost:5113/api/Bolika/2 HTTP/1.1
+###

@@ -1,0 +1,215 @@
+:root {
+    --spritewidth: 20vh;
+    --spriteheight: 40vh;
+    --spritesheetwidth: 40vh;
+}
+
+body {
+    margin: 0;
+    overflow: hidden;
+}
+
+.screen {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+/*1364 399.8 / 676 389*/
+#battleside {
+    width: 100%;
+    height: 60%;
+    position: relative;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* OLD DATA
+#player1 {
+    border: red solid 1px;
+    
+    width: var(--spritewidth);
+    height: var(--spriteheight);
+    overflow: hidden;
+    position: absolute;
+    top: 32%;
+    left: 20%;
+}
+
+#player2 {
+    border: blue solid 1px;
+    width: var(--spritewidth);
+    height: var(--spriteheight);
+    overflow: hidden;
+    position: absolute;
+    top: 32%;
+    right: 20%;
+    transform: scaleZ(-1);
+}
+
+#player1sprite {
+    width: 100%;
+    height: 270px;
+    position: absolute;
+    background-size: cover;
+    z-index: 0;
+}
+
+#player2sprite {
+    width: 100%;
+    height: 270px;
+    position: absolute;
+    background-size: cover;
+    z-index: -1;
+}
+
+
+#enem {
+    border: blue solid 1px;
+    width: var(--spritewidth);
+    height: var(--spriteheight);
+    position: absolute;
+    top: 20%;
+    right: 20%;
+}
+
+#flip{
+    transform: scaleX(-1);
+    display: inline-block;
+    position:absolute;
+    right: 0;
+  }
+
+  */
+
+  #player1{
+    display: inline-block;
+    overflow: hidden;
+    position: absolute;
+    top: 42%;
+    left: 10%;
+    }
+
+    #player1sprite,#player2sprite{
+      height: 203px;
+      width: 8217px;
+      
+    }
+    
+    #flip{
+      transform: scaleX(-1);
+      display: inline-block;
+      position:absolute;
+      top: 42%;
+    right: 5%;
+    }
+    
+    #player2{
+      overflow: hidden;
+      position: absolute;
+    
+    }
+    
+    #arrowflip{
+      transform: scaleX(-1);
+      position: absolute;
+      z-index: 10;
+    }
+    
+    #arrownoflip{
+      
+      position: absolute;
+      z-index: 10;
+    }
+    
+    #arrowbox{
+      width: 188px;
+      height: 83px;
+      overflow: hidden;
+      
+      z-index: 10;
+    }
+    
+    
+    #healbox{
+      width: 146px;
+      height: 209px;
+      overflow: hidden;
+      position: absolute;
+      
+      z-index: 10;
+    }
+
+#skillside {
+    width: 100%;
+    height: 50%;
+    position: relative;
+    
+}
+
+.icons {
+    width: 600px;
+    height: auto;
+    top: 30%;
+    margin-left: 10px;
+    display: block;
+    position: absolute;
+}
+
+.icons>div {
+    width: 100px;
+    height: 100px;
+    display: inline-block;   
+    background-size: cover;
+}
+
+#icon2,#icon3,#icon4 {
+    margin-left: 50px;
+}
+
+#skilldescription {
+    margin-left: 0px;
+    width: 50%;
+    height: 100%;
+    left: 50%;
+    position: relative;
+    padding-top: 5vh;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: white;
+}
+#desctitle{
+    font-size: 25px;
+    font-weight: bold;
+}
+#descstat{
+    font-size: 20px;
+    font-weight: bold;
+}
+#desc{
+    font-size: 15px;
+    white-space: normal;
+}
+
+@media only screen and (max-width: 800px) {
+    .icons {
+        width: 280px;
+        top: 40%;
+        margin-left: 12px;
+    }
+    .icons>div {
+        width: 50px;
+        height: 50px;
+    }
+    #icon2,
+    #icon3,
+    #icon4 {
+        margin-left: 20px;
+    }
+}
+
+/*
+    681 657
+*/

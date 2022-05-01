@@ -1,0 +1,85 @@
+.player1sprite-Animated {
+    animation: moveSpritesheet steps(2) 1000ms;
+}
+
+.player1-Animated {
+    animation: changeSize steps(2) 1000ms;
+}
+
+.player2sprite-Animated {
+    animation: moveSpritesheetReverse steps(2) 1000ms;
+}
+
+.player2-Animated {
+    animation: changeSize steps(2) 1000ms;
+    
+}
+/*
+@keyframes moveSpritesheet {
+    from {
+        transform: translate3d(0px, 0, 0)
+    }
+    100% {
+        object-position: 390px -30px;
+    }   
+    
+}
+
+@keyframes changeSize {
+    100% {
+        object-position: 781px 0px;
+    }
+}
+
+/*
+.player1sprite-Animated {
+    animation: moveSpritesheet steps(2) 1000ms;
+}
+
+.player1-Animated {
+    animation: changeSize steps(2) 1000ms;
+}
+
+.player2sprite-Animated {
+    animation: moveSpritesheetReverse steps(2) 1000ms;
+}
+
+.player2-Animated {
+    animation: changeSize steps(2) 1000ms;
+    
+}
+*/
+@keyframes moveSpritesheet {
+    from {
+        transform: translate3d(0px, 0, 0)
+    }
+    to {
+        transform: translate3d(-290px, -30px, 0)
+    }
+}
+
+@keyframes moveSpritesheetReverse {
+    from {
+        transform: translate3d(0px, 0, 0);
+        
+    }
+    to {
+        transform: translate3d(290px, 30px, 0);
+        
+    }
+}
+
+@keyframes changeSize {
+    from {
+        width: var(--spritewidth);
+        height: var(--spriteheight);
+    }
+    to {
+        width: 840px;
+        height: 271px;
+    }
+}
+/*
+    object-fit: cover;
+    object-position: 20% 10%;
+*/

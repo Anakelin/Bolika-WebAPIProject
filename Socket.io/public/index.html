@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bolika Battle Simulator</title>
+    <link rel="stylesheet" type="text/css" href="./CSS/layout.css">
+    <link rel="stylesheet" type="text/css" href="./CSS/bars.css">    
+    <link rel="stylesheet" type="text/css" href="./CSS/cataphractAnimations.css">    
+    <link rel="icon" href="https://icon-library.com/images/sword-icon-png/sword-icon-png-9.jpg">
+    <script src="./JAVASCRIPT/functions.js"></script>
+    <script src="./JAVASCRIPT/battleAnimations.js"></script>
+    <script src="./JAVASCRIPT/calcDamage.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+
+    <!--Se non lo metto non mi trova /favicon.ico che non è qualcosa che ho messo-->
+    <link rel="shortcut icon" href="#">
+</head>
+
+<body>
+    <div class="screen">
+        <div id="battleside">
+            <div id="health-bar0">
+                <div id="bar0">
+                    <div id="barvalue0">
+                    </div>
+                </div>
+                <div id="hit0"></div>
+            </div>
+            <div id="energy-bar0">
+                <div id="barE0">
+                </div>
+                <div id="hitE0"></div>
+            </div>
+            <div id="player1" class="pos0">
+                <div id="player1sprite"></div>
+            </div>
+            
+            <div id="health-bar1">
+                <div id="bar1">
+                    <div id="barvalue1"></div>
+                </div>
+                <div id="hit1"></div>
+            </div>
+            <div id="energy-bar1">
+                <div id="barE1">
+                </div>
+                <div id="hitE1"></div>
+            </div>
+            <div id="flip">
+                <div id="player2" class="pos0reverse">
+                    <div id="player2sprite"></div>
+                </div>
+            </div>
+        </div>
+        <div id="skillside">
+            <div class="icons">
+                <div id="icon1"></div>
+                <div id="icon2"></div>
+                <div id="icon3"></div>
+                <div id="icon4"></div>
+            </div>
+            <div id="skilldescription">
+                <div id="desctitle"></div>
+                <div id="descstat">
+                <div id="descdmg"></div>    
+                <div id="desccst"></div>    
+                </div>
+                <div id="desc"></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var socket = io();
+
+        var PlayerID = "";
+        var isFirstPlayer = false;
+        var skill1 = document.getElementById('icon1');
+        var skill2 = document.getElementById('icon2');
+        var skill3 = document.getElementById('icon3');
+        var skill4 = document.getElementById('icon4');
+
+        var desctitle = document.getElementById('desctitle');
+        var descstat = document.getElementById('descstat');
+        var desc = document.getElementById('desc');
+
+        var char = document.getElementById('player1')
+        var spritesheet = document.getElementById('player1sprite')
+        var char2 = document.getElementById('player2') 
+        var spritesheet2 = document.getElementById('player2sprite')
+      
+      char.style='width: 249px;height: 203px;';
+      spritesheet.classList.add('activeAnimation');
+
+      char2.style='width: 249px;height: 203px;';
+      spritesheet2.classList.add('activeAnimation');
+        
+        //enemy
+        var hBarEnemy = document.getElementById('health-bar1');
+        var hBarEnemyTotal = 100;
+        var hBarEnemyValue = hBarEnemyTotal;
+        var bar1 = document.getElementById('bar1');
+        var barvalue1 = document.getElementById('barvalue1');
+        var hit1 = document.getElementById('hit1');
+
+        var eBarEnemy = document.getElementById('energy-bar1');
+        var eBarEnemyTotal = 100;
+        var eBarEnemyValue = eBarEnemyTotal;
+        var eEnemyBar = document.getElementById('barE1');
+        var eEnemyCost = document.getElementById('hitE1');
+
+        //user            
+        var hBar = document.getElementById('health-bar0');
+        var hBarTotal = 100;
+        var hBarValue = hBarTotal;
+        var bar = document.getElementById('bar0');
+        var barvalue0 = document.getElementById('barvalue0');
+        var hit = document.getElementById('hit0');
+
+        var eBar = document.getElementById('energy-bar0');
+        var eBarTotal = 100;
+        var eBarValue = eBarTotal;
+        var ebar = document.getElementById('barE0');
+        var eCost = document.getElementById('hitE0');
+
+        var skillside = document.getElementById('skillside');
+        var battleside =document.getElementById('battleside');
+        var failedMove = false;
+        
+        var winningCondition = false;
+        var losingCondition = false;
+
+        socket.on('loadPage', function(ID) {
+            setChars();
+            setIcons(true);
+            PlayerID = ID;
+            isFirstPlayer = true;
+            skillside.style ='background-image: url(\'../img/skillside.png\');'
+            battleside.style ='background-image: url(\'../img/back.png\');'
+        })
+        socket.on('loadPageReverse', function(ID) {
+            setCharsReverse();
+            setIcons(false);
+            PlayerID = ID;
+            skillside.style ='background-image: url(\'../img/skillside.png\');'
+            battleside.style ='background-image: url(\'../img/backreverse.png\');'
+
+        })
+
+        socket.on('enemyskill', function(move) {
+            console.log('mossa'+move.skill)
+            switch(move.skill){
+                case 0:
+                playLu(false);
+                ChangeEnemyEnergy(move.cost);
+                ChangeHealth(move.dmg);
+                break;
+                case 1:
+                playBo(false);
+                ChangeEnemyEnergy(move.cost);
+                ChangeHealth(move.dmg);
+                ChangeEnemyHealth(-(move.dmg/2));
+                break;
+                case 2:
+                playCh(false);
+                ChangeEnemyEnergy(move.cost);
+                ChangeHealth(move.dmg);
+                break;
+                case 3:
+                playBn(false);
+                ChangeEnemyEnergy(move.cost);
+                ChangeEnemyHealth(-move.dmg);
+                break;
+
+            }
+            if(winningCondition || losingCondition)
+            {
+                if(winningCondition)
+                {
+                    window.alert('You win!')
+                }
+                else{
+                    window.alert('You lost!')
+                }
+            }
+        })
+
+        skill1.addEventListener('click', function() {
+            getMove(isFirstPlayer,0).then((result) => {
+                ChangeEnergy(result[0]['cost']);
+                if(!failedMove)
+                {
+                    playLu(true);
+                    ChangeEnemyHealth(result[0]['dmg']);
+                    socket.emit('playerskill', {skill:0,dmg:result[0]['dmg'],cost:result[0]['cost']});  
+                }       
+                else{
+                    window.alert('Mossa Fallita');
+                    failedMove=false;
+                }    
+                if(winningCondition || losingCondition)
+            {
+                if(winningCondition)
+                {
+                    window.alert('You win!')
+                }
+                else{
+                    window.alert('You lost!')
+                }
+            }     
+            })
+        })
+
+        skill2.addEventListener('click', function() {
+            getMove(isFirstPlayer,1).then((result) => {
+                ChangeEnergy(result[0]['cost']);
+                if(!failedMove)
+                {
+                    playBo(true);
+                    ChangeEnemyHealth(result[0]['dmg']);
+                    ChangeHealth(-(result[0]['dmg']/2));
+                    socket.emit('playerskill', {skill:1,dmg:result[0]['dmg'],cost:result[0]['cost']});
+                }
+                else{
+                    window.alert('Mossa Fallita');
+                    failedMove=false;
+                }              
+                if(winningCondition || losingCondition)
+            {
+                if(winningCondition)
+                {
+                    window.alert('You win!')
+                }
+                else{
+                    window.alert('You lost!')
+                }
+            } 
+            })
+        })
+
+        skill3.addEventListener('click', function() {
+            getMove(isFirstPlayer,2).then((result) => {
+                ChangeEnergy(result[0]['cost']);
+                if(!failedMove)
+                {
+                    playCh(true);
+                    ChangeEnemyHealth(result[0]['dmg']);
+                    socket.emit('playerskill', {skill:2,dmg:result[0]['dmg'],cost:result[0]['cost']});
+                }
+                else{
+                    window.alert('Mossa Fallita');
+                    failedMove=false;
+                }               
+            })
+        })
+
+        skill4.addEventListener('click', function() {
+            
+            getMove(isFirstPlayer,3).then((result) => {
+                ChangeEnergy(result[0]['cost']);
+                if(!failedMove)
+                {
+                    playBn(true);
+                    ChangeHealth(-result[0]['dmg']);
+                    socket.emit('playerskill', {skill:3,dmg:result[0]['dmg'],cost:result[0]['cost']});
+                }
+                else{
+                    window.alert('Mossa Fallita');
+                    failedMove=false;
+                }
+            })
+        })
+
+        skill1.addEventListener('mouseover', function() {
+            setDescriptions(isFirstPlayer,0);
+        })
+
+        skill2.addEventListener('mouseover', function() {
+            setDescriptions(isFirstPlayer,1);
+        })
+
+        skill3.addEventListener('mouseover', function() {
+            setDescriptions(isFirstPlayer,2);
+        })
+
+        skill4.addEventListener('mouseover', function() {
+            setDescriptions(isFirstPlayer,3);
+        })
+        
+    </script>
+</body>
+
+</html>
